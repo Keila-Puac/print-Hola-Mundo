@@ -5,6 +5,29 @@ import plotly.graph_objects as go
 from pathlib import Path
 import json
 import sys
+import re   # ← agrega esta línea al inicio del archivo (junto a los otros imports)
+
+def mostrar_insight(texto: str, icono: str = "📌"):
+    """Caja de insight legible. Convierte **texto** a negrita real."""
+    # Convierte **texto** → <strong>texto</strong>
+    texto_html = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', texto)
+
+    st.markdown(
+        f"""
+        <div style="
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border: 1px solid #cce0f5;
+            line-height: 1.5;
+        ">
+            <span style="font-size: 1.1rem; margin-right: 6px;">{icono}</span>
+            <span style="font-size: 1rem; color: #222;">{texto_html}</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # Agregar backend al path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "backend"))
@@ -57,22 +80,8 @@ def mostrar_kpi(titulo: str, valor: str, subtitulo: str = "", color: str = "#1f7
 
 
 def mostrar_insight(texto: str, icono: str = "📌"):
-    """Caja de insight legible."""
-    st.markdown(
-        f"""
-        <div style="
-            background-color: #e8f4fd;
-            border-radius: 8px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
-            border: 1px solid #cce0f5;
-        ">
-            <span style="font-size: 1.1rem;">{icono}</span>
-            <span style="font-size: 1rem; color: #222;">{texto}</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """Caja de insight legible con soporte de Markdown."""
+    st.info(f"{icono}  {texto}")
 
 
 # ============================================================
