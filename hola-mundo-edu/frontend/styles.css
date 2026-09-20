@@ -1,0 +1,15 @@
+/* Estilos complementarios para Educación Clara GT */
+
+.stMetric {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.insight-box {
+    background-color: #e8f4fd;
+    border-left: 4px solid #3182ce;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+}
